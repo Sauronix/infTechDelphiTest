@@ -1,9 +1,9 @@
 object fmClients: TfmClients
-  Left = 421
-  Top = 240
+  Left = 531
+  Top = 250
   Caption = #1057#1087#1088#1072#1074#1086#1095#1085#1080#1082' '#1082#1083#1080#1077#1085#1090#1086#1074
   ClientHeight = 517
-  ClientWidth = 606
+  ClientWidth = 826
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -11,12 +11,14 @@ object fmClients: TfmClients
   Font.Name = 'Tahoma'
   Font.Style = []
   OldCreateOrder = False
+  Position = poScreenCenter
+  OnCreate = FormCreate
   PixelsPerInch = 96
   TextHeight = 13
   object ToolBar1: TToolBar
     Left = 0
     Top = 0
-    Width = 606
+    Width = 826
     Height = 31
     ButtonHeight = 30
     ButtonWidth = 31
@@ -32,14 +34,12 @@ object fmClients: TfmClients
     object ToolButton2: TToolButton
       Left = 31
       Top = 0
-      Caption = 'ToolButton2'
-      ImageIndex = 1
+      Action = acEditClient
     end
     object ToolButton3: TToolButton
       Left = 62
       Top = 0
-      Caption = 'ToolButton3'
-      ImageIndex = 2
+      Action = acDeleteClient
     end
     object ToolButton4: TToolButton
       Left = 93
@@ -58,7 +58,7 @@ object fmClients: TfmClients
   object pnButtons: TPanel
     Left = 0
     Top = 476
-    Width = 606
+    Width = 826
     Height = 41
     Align = alBottom
     TabOrder = 1
@@ -67,10 +67,10 @@ object fmClients: TfmClients
     ExplicitTop = 400
     ExplicitWidth = 185
     DesignSize = (
-      606
+      826
       41)
     object btnOk: TButton
-      Left = 435
+      Left = 655
       Top = 8
       Width = 75
       Height = 25
@@ -80,7 +80,7 @@ object fmClients: TfmClients
       ExplicitLeft = 583
     end
     object btnCancel: TButton
-      Left = 516
+      Left = 736
       Top = 8
       Width = 75
       Height = 25
@@ -93,15 +93,17 @@ object fmClients: TfmClients
   object DBGrid1: TDBGrid
     Left = 0
     Top = 31
-    Width = 606
+    Width = 826
     Height = 445
     Align = alClient
+    DataSource = DsClients
     TabOrder = 2
     TitleFont.Charset = DEFAULT_CHARSET
     TitleFont.Color = clWindowText
     TitleFont.Height = -11
     TitleFont.Name = 'Tahoma'
     TitleFont.Style = []
+    OnDblClick = DBGrid1DblClick
   end
   object qClients: TIBDataSet
     Database = fmMain.IBDatabase
@@ -141,6 +143,8 @@ object fmClients: TfmClients
     Left = 32
     Top = 104
     object qClientsCLIENT_INN: TFloatField
+      DisplayLabel = #1048#1053#1053
+      DisplayWidth = 25
       FieldName = 'CLIENT_INN'
       Origin = 'T_CLIENTS.CLIENT_INN'
       Required = True
@@ -148,15 +152,18 @@ object fmClients: TfmClients
     object qClientsID: TIntegerField
       FieldName = 'ID'
       Origin = 'T_CLIENTS.ID'
-      Required = True
       Visible = False
     end
     object qClientsCLIENT_NAME: TIBStringField
+      DisplayLabel = #1053#1072#1080#1084#1077#1085#1086#1074#1072#1085#1080#1077
+      DisplayWidth = 70
       FieldName = 'CLIENT_NAME'
       Origin = 'T_CLIENTS.CLIENT_NAME'
       Size = 250
     end
     object qClientsCLIENT_BALANCE: TFloatField
+      DisplayLabel = #1058#1077#1082#1091#1097#1080#1081' '#1073#1072#1083#1072#1085#1089
+      DisplayWidth = 30
       FieldName = 'CLIENT_BALANCE'
       Origin = 'T_CLIENTS.CLIENT_BALANCE'
     end
@@ -173,19 +180,26 @@ object fmClients: TfmClients
     object acAddClient: TAction
       Caption = #1044#1086#1073#1072#1074#1080#1090#1100
       ImageIndex = 0
+      OnExecute = acAddClientExecute
     end
     object acEditClient: TAction
       Caption = #1048#1079#1084#1077#1085#1080#1090#1100
       ImageIndex = 1
+      OnExecute = acEditClientExecute
     end
     object acDeleteClient: TAction
       Caption = #1059#1076#1072#1083#1080#1090#1100
       ImageIndex = 2
+      OnExecute = acDeleteClientExecute
     end
     object acRefresh: TAction
       Caption = #1054#1073#1085#1086#1074#1080#1090#1100' '#1089#1090#1088#1086#1082#1091
       ImageIndex = 11
       OnExecute = acRefreshExecute
     end
+  end
+  object pmClients: TPopupMenu
+    Left = 32
+    Top = 176
   end
 end

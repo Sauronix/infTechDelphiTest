@@ -5,7 +5,7 @@ interface
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, DB, IBCustomDataSet, ActnList, ToolWin, ComCtrls, ExtCtrls, StdCtrls,
-  Grids, DBGrids;
+  Grids, DBGrids, Menus;
 
 type
   TfmClients = class(TForm)
@@ -30,10 +30,17 @@ type
     qClientsID: TIntegerField;
     qClientsCLIENT_NAME: TIBStringField;
     qClientsCLIENT_BALANCE: TFloatField;
+    pmClients: TPopupMenu;
     procedure acRefreshExecute(Sender: TObject);
+    procedure acAddClientExecute(Sender: TObject);
+    procedure acEditClientExecute(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
+    procedure DBGrid1DblClick(Sender: TObject);
+    procedure acDeleteClientExecute(Sender: TObject);
   private
     { Private declarations }
   public
+    sprMode:boolean;
     { Public declarations }
   end;
 
@@ -42,13 +49,73 @@ var
 
 implementation
 
-uses Main;
+uses Main, EditClients;
 
 {$R *.dfm}
 
+procedure TfmClients.acAddClientExecute(Sender: TObject);
+begin
+ qClients.Insert;
+ qClientsCLIENT_BALANCE.AsFloat:=0;
+ fmEditClients:=TfmEditClients.Create(self);
+
+     if fmEditClients.ShowModal=mrOk then
+      begin
+       if not fmMain.IBTransaction.InTransaction then fmMain.IBTransaction.StartTransaction;
+       try
+         qClients.Post;
+       except
+         qClients.Cancel;
+       end;
+        qClients.Refresh;
+       fmMain.IBTransaction.CommitRetaining;
+      end
+       else qClients.Cancel;
+
+end;
+
+procedure TfmClients.acDeleteClientExecute(Sender: TObject);
+begin
+  if MessageDlg('Удалить выделенного клиента?',mtConfirmation, [mbYes,mbNo],0) = mrYes then
+  begin
+    if not fmMain.IBTransaction.InTransaction then fmMain.IBTransaction.StartTransaction;
+     qClients.Delete;
+    fmMain.IBTransaction.CommitRetaining;
+  end;
+end;
+
+procedure TfmClients.acEditClientExecute(Sender: TObject);
+begin
+ qClients.Edit;
+ fmEditClients:=TfmEditClients.Create(self);
+ if fmEditClients.ShowModal=mrOk then
+  begin
+   if not fmMain.IBTransaction.InTransaction then fmMain.IBTransaction.StartTransaction;
+    qClients.Post;
+    qClients.Refresh;
+   fmMain.IBTransaction.CommitRetaining;
+  end
+   else qClients.Cancel;
+end;
+
 procedure TfmClients.acRefreshExecute(Sender: TObject);
 begin
- qClients.Refresh;
+ qClients.Close;
+ qClients.Open;
+end;
+
+procedure TfmClients.DBGrid1DblClick(Sender: TObject);
+begin
+ if sprMode then
+    ModalResult:=mrOk
+  else acEditClient.Execute;
+
+end;
+
+procedure TfmClients.FormCreate(Sender: TObject);
+begin
+ qClients.Open;
+ sprMode:=false;
 end;
 
 end.

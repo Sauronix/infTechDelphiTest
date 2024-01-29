@@ -5,7 +5,8 @@ uses
   Main in 'Main.pas' {fmMain},
   Clients in 'Clients.pas' {fmClients},
   EditOper in 'EditOper.pas' {fmEditOper},
-  EditClients in 'EditClients.pas' {fmEditClients};
+  EditClients in 'EditClients.pas' {fmEditClients},
+  Balance in 'Balance.pas' {fmBalance};
 
 {$R *.res}
 
@@ -15,5 +16,6 @@ begin
   Application.CreateForm(TfmMain, fmMain);
   Application.CreateForm(TfmEditOper, fmEditOper);
   Application.CreateForm(TfmEditClients, fmEditClients);
+  Application.CreateForm(TfmBalance, fmBalance);
   Application.Run;
 end.

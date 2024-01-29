@@ -1,9 +1,9 @@
 object fmMain: TfmMain
-  Left = 478
-  Top = 201
+  Left = 427
+  Top = 216
   Caption = 'fmMain'
   ClientHeight = 658
-  ClientWidth = 840
+  ClientWidth = 789
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -13,31 +13,62 @@ object fmMain: TfmMain
   Menu = MainMenu
   OldCreateOrder = False
   Position = poScreenCenter
+  OnClose = FormClose
   OnCreate = FormCreate
   PixelsPerInch = 96
   TextHeight = 13
   object ToolBar1: TToolBar
     Left = 0
     Top = 0
-    Width = 840
+    Width = 789
     ButtonHeight = 30
     ButtonWidth = 31
     Caption = 'ToolBar1'
     HotImages = ImageListHot
     Images = ImageListNormal
     TabOrder = 0
-    object ToolButton1: TToolButton
+    ExplicitWidth = 840
+    object ToolButton5: TToolButton
       Left = 0
+      Top = 0
+      Action = acAddOper
+    end
+    object ToolButton4: TToolButton
+      Left = 31
+      Top = 0
+      Action = acEditOper
+    end
+    object ToolButton3: TToolButton
+      Left = 62
+      Top = 0
+      Action = acDeleteOper
+    end
+    object ToolButton1: TToolButton
+      Left = 93
       Top = 0
       Width = 8
       Caption = 'ToolButton1'
       Style = tbsSeparator
     end
     object ToolButton2: TToolButton
-      Left = 8
+      Left = 101
       Top = 0
-      Action = acClose
+      Action = acRefresh
     end
+  end
+  object DBGrid1: TDBGrid
+    Left = 0
+    Top = 32
+    Width = 789
+    Height = 626
+    Align = alClient
+    DataSource = dsOpers
+    TabOrder = 1
+    TitleFont.Charset = DEFAULT_CHARSET
+    TitleFont.Color = clWindowText
+    TitleFont.Height = -11
+    TitleFont.Name = 'Tahoma'
+    TitleFont.Style = []
   end
   object MainMenu: TMainMenu
     Images = ImageListNormal
@@ -51,6 +82,9 @@ object fmMain: TfmMain
     end
     object N2: TMenuItem
       Caption = #1057#1087#1088#1072#1074#1086#1095#1085#1080#1082#1080
+      object acShowClients1: TMenuItem
+        Action = acShowClients
+      end
     end
   end
   object pmOperations: TPopupMenu
@@ -58,7 +92,6 @@ object fmMain: TfmMain
     Top = 200
   end
   object IBDatabase: TIBDatabase
-    Connected = True
     DatabaseName = 'D:\DelphiProj\infTechDelphiTest\db\INFTECH.GDB '
     Params.Strings = (
       'user_name=SYSDBA'
@@ -77,7 +110,7 @@ object fmMain: TfmMain
       'rec_version'
       'nowait')
     AutoStopAction = saCommit
-    Left = 120
+    Left = 112
     Top = 56
   end
   object ActionList: TActionList
@@ -91,16 +124,28 @@ object fmMain: TfmMain
     end
     object acAddOper: TAction
       Caption = #1044#1086#1073#1072#1074#1080#1090#1100
+      ImageIndex = 0
+      OnExecute = acAddOperExecute
     end
     object acEditOper: TAction
       Caption = #1048#1079#1084#1077#1085#1080#1090#1100
+      ImageIndex = 1
+      OnExecute = acEditOperExecute
     end
     object acDeleteOper: TAction
       Caption = #1059#1076#1072#1083#1080#1090#1100
+      ImageIndex = 2
+      OnExecute = acDeleteOperExecute
     end
     object acShowClients: TAction
-      Caption = 'acShowClients'
+      Caption = #1057#1087#1088#1072#1074#1086#1095#1085#1080#1082' '#1082#1083#1080#1077#1085#1090#1086#1074
+      ImageIndex = 9
       OnExecute = acShowClientsExecute
+    end
+    object acRefresh: TAction
+      Caption = #1054#1073#1085#1086#1074#1080#1090#1100
+      ImageIndex = 11
+      OnExecute = acRefreshExecute
     end
   end
   object ImageListNormal: TImageList
@@ -2505,10 +2550,6 @@ object fmMain: TfmMain
       01FFFFFFFFFFFFFFFFFFFFFFFFFFFFFF00000000000000000000000000000000
       000000000000}
   end
-  object qOpers: TIBDataSet
-    Left = 112
-    Top = 200
-  end
   object IBScript2: TIBScript
     Database = IBDatabase
     Transaction = IBTransaction
@@ -2551,11 +2592,96 @@ object fmMain: TfmMain
       ''
       'COMMIT WORK^'
       'COMMIT WORK^')
-    Left = 216
-    Top = 120
+    Left = 184
+    Top = 128
   end
   object qBalance: TIBDataSet
+    Database = IBDatabase
+    Transaction = IBTransaction
     Left = 184
     Top = 200
+  end
+  object dsOpers: TDataSource
+    DataSet = qOpers
+    Left = 112
+    Top = 272
+  end
+  object qOpers: TIBDataSet
+    Database = IBDatabase
+    Transaction = IBTransaction
+    DeleteSQL.Strings = (
+      'delete from T_OPERATIONS'
+      'where'
+      '  ID = :OLD_ID')
+    InsertSQL.Strings = (
+      'insert into T_OPERATIONS'
+      '  (DATE_OPER, ID, ID_CLIENT, SUM_OPER)'
+      'values'
+      '  (:DATE_OPER, :ID, :ID_CLIENT, :SUM_OPER)')
+    RefreshSQL.Strings = (
+      'select op.ID, op.DATE_OPER, op.SUM_OPER,'
+      'op.ID_CLIENT, cl.CLIENT_INN, cl.CLIENT_NAME'
+      ' from T_OPERATIONS op'
+      'left join T_CLIENTS cl'
+      'on op.ID_CLIENT=cl.ID'
+      'where'
+      '  op.ID = :ID')
+    SelectSQL.Strings = (
+      'select op.ID, op.DATE_OPER, op.SUM_OPER,'
+      'op.ID_CLIENT, cl.CLIENT_INN, cl.CLIENT_NAME'
+      ' from T_OPERATIONS op'
+      'left join T_CLIENTS cl'
+      'on op.ID_CLIENT=cl.ID')
+    ModifySQL.Strings = (
+      'update T_OPERATIONS'
+      'set'
+      '  DATE_OPER = :DATE_OPER,'
+      '  ID_CLIENT = :ID_CLIENT,'
+      '  SUM_OPER = :SUM_OPER'
+      'where'
+      '  ID = :OLD_ID')
+    GeneratorField.Field = 'ID'
+    GeneratorField.Generator = 'GE_OPERATIONS'
+    GeneratorField.ApplyEvent = gamOnPost
+    Left = 112
+    Top = 200
+    object qOpersID: TIntegerField
+      FieldName = 'ID'
+      Origin = 'T_OPERATIONS.ID'
+      Required = True
+      Visible = False
+    end
+    object qOpersDATE_OPER: TDateTimeField
+      DisplayLabel = #1044#1072#1090#1072
+      FieldName = 'DATE_OPER'
+      Origin = 'T_OPERATIONS.DATE_OPER'
+      Required = True
+    end
+    object qOpersSUM_OPER: TFloatField
+      DisplayLabel = #1057#1091#1084#1084#1072
+      DisplayWidth = 18
+      FieldName = 'SUM_OPER'
+      Origin = 'T_OPERATIONS.SUM_OPER'
+      Required = True
+    end
+    object qOpersID_CLIENT: TIntegerField
+      FieldName = 'ID_CLIENT'
+      Origin = 'T_OPERATIONS.ID_CLIENT'
+      Required = True
+      Visible = False
+    end
+    object qOpersCLIENT_INN: TFloatField
+      DisplayLabel = #1048#1053#1053
+      DisplayWidth = 18
+      FieldName = 'CLIENT_INN'
+      Origin = 'T_CLIENTS.CLIENT_INN'
+    end
+    object qOpersCLIENT_NAME: TIBStringField
+      DisplayLabel = #1053#1072#1080#1084#1077#1085#1086#1074#1072#1085#1080#1077
+      DisplayWidth = 70
+      FieldName = 'CLIENT_NAME'
+      Origin = 'T_CLIENTS.CLIENT_NAME'
+      Size = 250
+    end
   end
 end

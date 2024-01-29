@@ -50,6 +50,9 @@
 			<DCCReference Include="EditClients.pas">
 				<Form>fmEditClients</Form>
 			</DCCReference>
+			<DCCReference Include="Balance.pas">
+				<Form>fmBalance</Form>
+			</DCCReference>
 			<BuildConfiguration Include="Base">
 				<Key>Base</Key>
 			</BuildConfiguration>

@@ -10,5 +10,7 @@
     <Transaction>2024.01.29 12:12:43.238.dfm,D:\DelphiProj\infTechDelphiTest\Unit1.dfm=D:\DelphiProj\infTechDelphiTest\EditOper.dfm</Transaction>
     <Transaction>2024.01.29 12:12:57.289.pas,D:\DelphiProj\infTechDelphiTest\Unit2.pas=D:\DelphiProj\infTechDelphiTest\EditClients.pas</Transaction>
     <Transaction>2024.01.29 12:12:57.289.dfm,D:\DelphiProj\infTechDelphiTest\Unit2.dfm=D:\DelphiProj\infTechDelphiTest\EditClients.dfm</Transaction>
+    <Transaction>2024.01.29 17:51:28.640.pas,D:\DelphiProj\infTechDelphiTest\Unit1.pas=D:\DelphiProj\infTechDelphiTest\Balance.pas</Transaction>
+    <Transaction>2024.01.29 17:51:28.640.dfm,D:\DelphiProj\infTechDelphiTest\Unit1.dfm=D:\DelphiProj\infTechDelphiTest\Balance.dfm</Transaction>
   </Transactions>
 </BorlandProject>

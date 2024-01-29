@@ -4,10 +4,16 @@ interface
 
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
-  Dialogs;
+  Dialogs, StdCtrls, Mask, DBCtrls;
 
 type
   TfmEditClients = class(TForm)
+    btnOk: TButton;
+    btnCancel: TButton;
+    dbeINN: TDBEdit;
+    dbeName: TDBEdit;
+    lblInn: TLabel;
+    lblName: TLabel;
   private
     { Private declarations }
   public
