@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+	<Transactions>
+    <Transaction>2024.01.29 09:53:37.827.pas,C:\Users\002-1020\Documents\RAD Studio\Projects\Unit1.pas=D:\DelphiProj\infTechDelphiTest\Main.pas</Transaction>
+    <Transaction>2024.01.29 09:53:37.827.dfm,C:\Users\002-1020\Documents\RAD Studio\Projects\Unit1.dfm=D:\DelphiProj\infTechDelphiTest\Main.dfm</Transaction>
+    <Transaction>2024.01.29 09:53:54.826.dproj,C:\Users\002-1020\Documents\RAD Studio\Projects\Project1.dproj=D:\DelphiProj\infTechDelphiTest\infTechDelphiTest.dproj</Transaction>
+    <Transaction>2024.01.29 10:56:40.583.pas,D:\DelphiProj\infTechDelphiTest\Unit1.pas=D:\DelphiProj\infTechDelphiTest\Clients.pas</Transaction>
+    <Transaction>2024.01.29 10:56:40.583.dfm,D:\DelphiProj\infTechDelphiTest\Unit1.dfm=D:\DelphiProj\infTechDelphiTest\Clients.dfm</Transaction>
+    <Transaction>2024.01.29 12:12:43.238.pas,D:\DelphiProj\infTechDelphiTest\Unit1.pas=D:\DelphiProj\infTechDelphiTest\EditOper.pas</Transaction>
+    <Transaction>2024.01.29 12:12:43.238.dfm,D:\DelphiProj\infTechDelphiTest\Unit1.dfm=D:\DelphiProj\infTechDelphiTest\EditOper.dfm</Transaction>
+    <Transaction>2024.01.29 12:12:57.289.pas,D:\DelphiProj\infTechDelphiTest\Unit2.pas=D:\DelphiProj\infTechDelphiTest\EditClients.pas</Transaction>
+    <Transaction>2024.01.29 12:12:57.289.dfm,D:\DelphiProj\infTechDelphiTest\Unit2.dfm=D:\DelphiProj\infTechDelphiTest\EditClients.dfm</Transaction>
+  </Transactions>
+</BorlandProject>

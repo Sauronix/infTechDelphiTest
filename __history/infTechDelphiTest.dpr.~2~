@@ -1,0 +1,16 @@
+program infTechDelphiTest;
+
+uses
+  Forms,
+  Main in 'Main.pas' {fmMain},
+  Clients in 'Clients.pas' {fmClients};
+
+{$R *.res}
+
+begin
+  Application.Initialize;
+  Application.MainFormOnTaskbar := True;
+  Application.CreateForm(TfmMain, fmMain);
+  Application.CreateForm(TfmClients, fmClients);
+  Application.Run;
+end.
