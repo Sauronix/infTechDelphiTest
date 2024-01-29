@@ -16,7 +16,6 @@ type
     N2: TMenuItem;
     IBDatabase: TIBDatabase;
     IBTransaction: TIBTransaction;
-    qClients: TIBDataSet;
     ActionList: TActionList;
     ImageListNormal: TImageList;
     ImageListHot: TImageList;
@@ -29,8 +28,8 @@ type
     acAddOper: TAction;
     acDeleteOper: TAction;
     acEditOper: TAction;
-    Button1: TButton;
     acShowClients: TAction;
+    qBalance: TIBDataSet;
     procedure acCloseExecute(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure acShowClientsExecute(Sender: TObject);

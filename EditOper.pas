@@ -19,6 +19,8 @@ var
 
 implementation
 
+uses Main;
+
 {$R *.dfm}
 
 end.

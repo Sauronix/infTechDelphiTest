@@ -39,14 +39,6 @@ object fmMain: TfmMain
       Action = acClose
     end
   end
-  object Button1: TButton
-    Left = 216
-    Top = 272
-    Width = 75
-    Height = 25
-    Caption = 'Button1'
-    TabOrder = 1
-  end
   object MainMenu: TMainMenu
     Images = ImageListNormal
     Left = 40
@@ -66,6 +58,8 @@ object fmMain: TfmMain
     Top = 200
   end
   object IBDatabase: TIBDatabase
+    Connected = True
+    DatabaseName = 'D:\DelphiProj\infTechDelphiTest\db\INFTECH.GDB '
     Params.Strings = (
       'user_name=SYSDBA'
       'password=masterkey'
@@ -84,10 +78,6 @@ object fmMain: TfmMain
       'nowait')
     AutoStopAction = saCommit
     Left = 120
-    Top = 56
-  end
-  object qClients: TIBDataSet
-    Left = 216
     Top = 56
   end
   object ActionList: TActionList
@@ -2563,5 +2553,9 @@ object fmMain: TfmMain
       'COMMIT WORK^')
     Left = 216
     Top = 120
+  end
+  object qBalance: TIBDataSet
+    Left = 184
+    Top = 200
   end
 end
