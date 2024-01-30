@@ -25,7 +25,6 @@ object fmClients: TfmClients
     Caption = 'ToolBar1'
     Images = fmMain.ImageListNormal
     TabOrder = 0
-    ExplicitWidth = 902
     object ToolButton1: TToolButton
       Left = 0
       Top = 0
@@ -54,6 +53,19 @@ object fmClients: TfmClients
       Top = 0
       Action = acRefresh
     end
+    object ToolButton6: TToolButton
+      Left = 132
+      Top = 0
+      Width = 8
+      Caption = 'ToolButton6'
+      ImageIndex = 12
+      Style = tbsSeparator
+    end
+    object ToolButton7: TToolButton
+      Left = 140
+      Top = 0
+      Action = acBalance
+    end
   end
   object pnButtons: TPanel
     Left = 0
@@ -63,9 +75,6 @@ object fmClients: TfmClients
     Align = alBottom
     TabOrder = 1
     Visible = False
-    ExplicitLeft = 224
-    ExplicitTop = 400
-    ExplicitWidth = 185
     DesignSize = (
       826
       41)
@@ -76,8 +85,8 @@ object fmClients: TfmClients
       Height = 25
       Anchors = [akTop, akRight]
       Caption = #1054#1050
+      ModalResult = 1
       TabOrder = 0
-      ExplicitLeft = 583
     end
     object btnCancel: TButton
       Left = 736
@@ -86,8 +95,8 @@ object fmClients: TfmClients
       Height = 25
       Anchors = [akTop, akRight]
       Caption = #1054#1090#1084#1077#1085#1072
+      ModalResult = 2
       TabOrder = 1
-      ExplicitLeft = 664
     end
   end
   object DBGrid1: TDBGrid
@@ -196,6 +205,11 @@ object fmClients: TfmClients
       Caption = #1054#1073#1085#1086#1074#1080#1090#1100' '#1089#1090#1088#1086#1082#1091
       ImageIndex = 11
       OnExecute = acRefreshExecute
+    end
+    object acBalance: TAction
+      Caption = #1041#1072#1083#1072#1085#1089' '#1087#1086' '#1082#1083#1080#1077#1085#1090#1091
+      ImageIndex = 8
+      OnExecute = acBalanceExecute
     end
   end
   object pmClients: TPopupMenu

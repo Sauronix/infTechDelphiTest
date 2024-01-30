@@ -31,12 +31,16 @@ type
     qClientsCLIENT_NAME: TIBStringField;
     qClientsCLIENT_BALANCE: TFloatField;
     pmClients: TPopupMenu;
+    ToolButton6: TToolButton;
+    ToolButton7: TToolButton;
+    acBalance: TAction;
     procedure acRefreshExecute(Sender: TObject);
     procedure acAddClientExecute(Sender: TObject);
     procedure acEditClientExecute(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure DBGrid1DblClick(Sender: TObject);
     procedure acDeleteClientExecute(Sender: TObject);
+    procedure acBalanceExecute(Sender: TObject);
   private
     { Private declarations }
   public
@@ -49,7 +53,7 @@ var
 
 implementation
 
-uses Main, EditClients;
+uses Main, EditClients, Balance;
 
 {$R *.dfm}
 
@@ -72,6 +76,15 @@ begin
       end
        else qClients.Cancel;
 
+end;
+
+procedure TfmClients.acBalanceExecute(Sender: TObject);
+begin
+ fmBalance:=TfmBalance.Create(self);
+ fmBalance.qBalance.ParamByName('ID_CLIENT').AsInteger:=qClientsID.AsInteger;
+ fmBalance.eClient.Text:=qClientsCLIENT_NAME.AsString;
+ fmBalance.ShowModal;
+ fmBalance.Free;
 end;
 
 procedure TfmClients.acDeleteClientExecute(Sender: TObject);

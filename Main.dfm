@@ -1,9 +1,9 @@
 object fmMain: TfmMain
-  Left = 427
-  Top = 216
-  Caption = 'fmMain'
-  ClientHeight = 658
-  ClientWidth = 789
+  Left = 426
+  Top = 170
+  Caption = #1048#1085#1092#1058#1077#1093' '#1076#1077#1084#1086' '#1087#1088#1080#1083#1086#1078#1077#1085#1080#1077
+  ClientHeight = 698
+  ClientWidth = 806
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -20,14 +20,14 @@ object fmMain: TfmMain
   object ToolBar1: TToolBar
     Left = 0
     Top = 0
-    Width = 789
+    Width = 806
+    Height = 29
     ButtonHeight = 30
     ButtonWidth = 31
     Caption = 'ToolBar1'
     HotImages = ImageListHot
     Images = ImageListNormal
     TabOrder = 0
-    ExplicitWidth = 840
     object ToolButton5: TToolButton
       Left = 0
       Top = 0
@@ -58,11 +58,12 @@ object fmMain: TfmMain
   end
   object DBGrid1: TDBGrid
     Left = 0
-    Top = 32
-    Width = 789
-    Height = 626
+    Top = 29
+    Width = 806
+    Height = 669
     Align = alClient
     DataSource = dsOpers
+    PopupMenu = pmOperations
     TabOrder = 1
     TitleFont.Charset = DEFAULT_CHARSET
     TitleFont.Color = clWindowText
@@ -86,17 +87,29 @@ object fmMain: TfmMain
         Action = acShowClients
       end
     end
+    object N6: TMenuItem
+      Caption = #1054#1090#1095#1077#1090#1099
+      object N7: TMenuItem
+        Action = acBalance
+      end
+    end
   end
   object pmOperations: TPopupMenu
+    Images = ImageListNormal
     Left = 40
     Top = 200
+    object N3: TMenuItem
+      Action = acAddOper
+    end
+    object N4: TMenuItem
+      Action = acEditOper
+    end
+    object N5: TMenuItem
+      Action = acDeleteOper
+    end
   end
   object IBDatabase: TIBDatabase
-    DatabaseName = 'D:\DelphiProj\infTechDelphiTest\db\INFTECH.GDB '
-    Params.Strings = (
-      'user_name=SYSDBA'
-      'password=masterkey'
-      'lc_ctype=WIN1251')
+    DatabaseName = 'D:\DelphiProj\infTechDelphiTest\db\INFTECH.GDB 1'
     LoginPrompt = False
     DefaultTransaction = IBTransaction
     SQLDialect = 1
@@ -119,33 +132,45 @@ object fmMain: TfmMain
     Top = 128
     object acClose: TAction
       Caption = #1042#1099#1093#1086#1076
+      Hint = #1042#1099#1093#1086#1076
       ImageIndex = 4
       OnExecute = acCloseExecute
     end
     object acAddOper: TAction
       Caption = #1044#1086#1073#1072#1074#1080#1090#1100
+      Hint = #1044#1086#1073#1072#1074#1080#1090#1100
       ImageIndex = 0
       OnExecute = acAddOperExecute
     end
     object acEditOper: TAction
       Caption = #1048#1079#1084#1077#1085#1080#1090#1100
+      Hint = #1048#1079#1084#1077#1085#1080#1090#1100
       ImageIndex = 1
       OnExecute = acEditOperExecute
     end
     object acDeleteOper: TAction
       Caption = #1059#1076#1072#1083#1080#1090#1100
+      Hint = #1059#1076#1072#1083#1080#1090#1100
       ImageIndex = 2
       OnExecute = acDeleteOperExecute
     end
     object acShowClients: TAction
       Caption = #1057#1087#1088#1072#1074#1086#1095#1085#1080#1082' '#1082#1083#1080#1077#1085#1090#1086#1074
+      Hint = #1057#1087#1088#1072#1074#1086#1095#1085#1080#1082' '#1082#1083#1080#1077#1085#1090#1086#1074
       ImageIndex = 9
       OnExecute = acShowClientsExecute
     end
     object acRefresh: TAction
       Caption = #1054#1073#1085#1086#1074#1080#1090#1100
+      Hint = #1054#1073#1085#1086#1074#1080#1090#1100
       ImageIndex = 11
       OnExecute = acRefreshExecute
+    end
+    object acBalance: TAction
+      Caption = #1041#1072#1083#1072#1085#1089' '#1087#1086' '#1082#1083#1080#1077#1085#1090#1091
+      Hint = #1041#1072#1083#1072#1085#1089' '#1087#1086' '#1082#1083#1080#1077#1085#1090#1091
+      ImageIndex = 8
+      OnExecute = acBalanceExecute
     end
   end
   object ImageListNormal: TImageList
@@ -154,7 +179,7 @@ object fmMain: TfmMain
     Left = 40
     Top = 272
     Bitmap = {
-      494C01010E003700E40018001800FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C01010E003700F00018001800FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000600000006000000001002000000000000090
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000006350000063500000738000009
@@ -1355,7 +1380,7 @@ object fmMain: TfmMain
     Left = 40
     Top = 336
     Bitmap = {
-      494C01010E003700E40018001800FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C01010E003700F00018001800FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000600000006000000001002000000000000090
       0000000000000000000000000000000000000000000000000000000000000000
       00000000000000000000000000000000000000104E0000104E00001152000014
@@ -2551,46 +2576,69 @@ object fmMain: TfmMain
       000000000000}
   end
   object IBScript2: TIBScript
+    AutoDDL = False
     Database = IBDatabase
     Transaction = IBTransaction
     Terminator = '^'
     Script.Strings = (
-      '/***********************************/'
-      '/*              Tables             */'
-      '/***********************************/'
       ''
-      '/* Table: T_CLIENTS  */'
-      'CREATE TABLE T_CLIENTS ('
-      '       CLIENT_INN DOUBLE PRECISION NOT NULL,'
-      '       ID INTEGER NOT NULL,'
-      '       CLIENT_NAME VARCHAR(250) CHARACTER SET WIN1251,'
-      '       CLIENT_BALANCE NUMERIC(15,2) DEFAULT 0 NOT NULL'
-      ')^'
+      'CREATE TRIGGER TR_CLIENTS_BI FOR T_CLIENTS'
+      'ACTIVE BEFORE INSERT POSITION 0'
+      'AS'
       ''
-      '/* Table: T_OPERATIONS  */'
-      'CREATE TABLE T_OPERATIONS ('
-      '       ID INTEGER NOT NULL,'
-      '       ID_CLIENT INTEGER NOT NULL,'
-      '       SUM_OPER NUMERIC(15,2) NOT NULL,'
-      '       DATE_OPER DATE NOT NULL'
-      ')^'
+      'begin'
+      '     if (NEW.ID is null) then NEW.ID = GEN_ID(GE_CLIENTS, 1);'
       ''
-      '/*---------------------------*/'
-      '/*  Foreign Key Definitions  */'
-      '/*---------------------------*/'
+      'end'
+      ' ^ '
       ''
-      '/*  Check Constraints  */'
-      '/***********************************/'
-      '/*             Generators          */'
-      '/***********************************/'
+      'CREATE TRIGGER TR_OPERATIONS_AD FOR T_OPERATIONS'
+      'ACTIVE AFTER DELETE POSITION 0'
+      'AS'
       ''
-      'CREATE GENERATOR GE_CLIENTS^'
-      'CREATE GENERATOR GE_OPERATIONS^'
+      'begin'
+      ' UPDATE T_CLIENTS SET CLIENT_BALANCE=CLIENT_BALANCE-OLD.SUM_OPER'
+      ' where ID=OLD.ID_CLIENT;'
       ''
-      'SET GENERATOR GE_CLIENTS TO 0^'
-      'SET GENERATOR GE_OPERATIONS TO 0^'
+      'end'
+      ' ^ '
       ''
-      'COMMIT WORK^'
+      'CREATE TRIGGER TR_OPERATIONS_AI FOR T_OPERATIONS'
+      'ACTIVE AFTER INSERT POSITION 0'
+      'AS'
+      ''
+      'begin'
+      
+        'UPDATE T_CLIENTS C SET C.CLIENT_BALANCE=C.CLIENT_BALANCE+NEW.SUM' +
+        '_OPER WHERE C.ID=NEW.ID_CLIENT;'
+      ''
+      'end'
+      ' ^ '
+      ''
+      'CREATE TRIGGER TR_OPERATIONS_AU FOR T_OPERATIONS'
+      'ACTIVE AFTER UPDATE POSITION 0'
+      'AS'
+      ''
+      'begin'
+      'UPDATE T_CLIENTS SET CLIENT_BALANCE=CLIENT_BALANCE-OLD.SUM_OPER'
+      'WHERE ID=OLD.ID_CLIENT;'
+      ''
+      'UPDATE T_CLIENTS SET CLIENT_BALANCE=CLIENT_BALANCE+NEW.SUM_OPER'
+      'WHERE ID=NEW.ID_CLIENT;'
+      ''
+      'end'
+      ' ^ '
+      ''
+      'CREATE TRIGGER TR_OPERATIONS_BI FOR T_OPERATIONS'
+      'ACTIVE BEFORE INSERT POSITION 0'
+      'AS'
+      ''
+      'begin'
+      ' if (NEW.ID is null) then NEW.ID = GEN_ID(GE_OPERATIONS, 1);'
+      ''
+      'end'
+      ' ^ '
+      ''
       'COMMIT WORK^')
     Left = 184
     Top = 128
@@ -2598,8 +2646,16 @@ object fmMain: TfmMain
   object qBalance: TIBDataSet
     Database = IBDatabase
     Transaction = IBTransaction
+    SelectSQL.Strings = (
+      '  select COALESCE(SUM(SUM_OPER),0) as BALANCE'
+      '  from T_OPERATIONS'
+      '    where  DATE_OPER<=:DT_OPER and ID_CLIENT = :ID_CLIENT')
     Left = 184
     Top = 200
+    object qBalanceBALANCE: TFloatField
+      FieldName = 'BALANCE'
+      ProviderFlags = []
+    end
   end
   object dsOpers: TDataSource
     DataSet = qOpers
@@ -2631,7 +2687,8 @@ object fmMain: TfmMain
       'op.ID_CLIENT, cl.CLIENT_INN, cl.CLIENT_NAME'
       ' from T_OPERATIONS op'
       'left join T_CLIENTS cl'
-      'on op.ID_CLIENT=cl.ID')
+      'on op.ID_CLIENT=cl.ID'
+      'order by op.DATE_OPER desc')
     ModifySQL.Strings = (
       'update T_OPERATIONS'
       'set'

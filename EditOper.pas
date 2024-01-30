@@ -4,7 +4,7 @@ interface
 
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
-  Dialogs, StdCtrls, Mask, DBCtrls, ComCtrls;
+  Dialogs, StdCtrls, Mask, DBCtrls, ComCtrls, DateUtils;
 
 type
   TfmEditOper = class(TForm)
@@ -18,10 +18,13 @@ type
     Label1: TLabel;
     Label2: TLabel;
     procedure btnChooseClientClick(Sender: TObject);
+    procedure btnOkClick(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
     procedure dtDateOperChange(Sender: TObject);
   private
     { Private declarations }
   public
+    OldSum:Double;
     { Public declarations }
   end;
 
@@ -46,9 +49,29 @@ begin
   end;
 end;
 
+procedure TfmEditOper.btnOkClick(Sender: TObject);
+ var SumOper:Double;
+begin
+ if fmMain.qOpersID_CLIENT.AsInteger>0 then
+  begin
+   if (fmMain.GetBalance(fmMain.qOpersID_CLIENT.AsInteger, dtDateOper.DateTime)-OldSum+fmMain.qOpersSUM_OPER.AsFloat)<0 then
+    ShowMessage('Недостаточно средств на дату операции ')
+     else if (fmMain.GetBalance(fmMain.qOpersID_CLIENT.AsInteger, Date())-OldSum+fmMain.qOpersSUM_OPER.AsFloat)<0 then
+    ShowMessage('Недостаточно средств на текущую дату')
+   else ModalResult:=mrOk;
+  end else ShowMessage('Выберите клиента для проведения операции');
+
+end;
+
 procedure TfmEditOper.dtDateOperChange(Sender: TObject);
 begin
- fmMain.qOpersDATE_OPER.AsDateTime:=dtDateOper.DateTime;
+   fmMain.qOpersDATE_OPER.AsDateTime:=dtDateOper.DateTime;
+end;
+
+procedure TfmEditOper.FormCreate(Sender: TObject);
+begin
+ OldSum:=0;
+ dtDateOper.MaxDate:=Date();
 end;
 
 end.

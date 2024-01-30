@@ -12,6 +12,7 @@ object fmEditOper: TfmEditOper
   Font.Style = []
   OldCreateOrder = False
   Position = poScreenCenter
+  OnCreate = FormCreate
   DesignSize = (
     440
     224)
@@ -63,10 +64,8 @@ object fmEditOper: TfmEditOper
     Height = 25
     Anchors = [akRight, akBottom]
     Caption = #1054#1050
-    ModalResult = 1
     TabOrder = 0
-    ExplicitLeft = 309
-    ExplicitTop = 372
+    OnClick = btnOkClick
   end
   object btnCancel: TButton
     Left = 352
@@ -77,8 +76,6 @@ object fmEditOper: TfmEditOper
     Caption = #1054#1090#1084#1077#1085#1072
     ModalResult = 2
     TabOrder = 1
-    ExplicitLeft = 390
-    ExplicitTop = 372
   end
   object dtDateOper: TDateTimePicker
     Left = 24
@@ -92,6 +89,7 @@ object fmEditOper: TfmEditOper
     Font.Height = -13
     Font.Name = 'Tahoma'
     Font.Style = []
+    MaxDate = 45321.627111250000000000
     ParentFont = False
     TabOrder = 2
     OnChange = dtDateOperChange

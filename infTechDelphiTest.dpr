@@ -14,8 +14,5 @@ begin
   Application.Initialize;
   Application.MainFormOnTaskbar := True;
   Application.CreateForm(TfmMain, fmMain);
-  Application.CreateForm(TfmEditOper, fmEditOper);
-  Application.CreateForm(TfmEditClients, fmEditClients);
-  Application.CreateForm(TfmBalance, fmBalance);
   Application.Run;
 end.
